@@ -15,6 +15,7 @@ export default function Landing({ navigation }) {
           <View style={styles.recuadro}>
             <Text style={styles.quizz}>Chanchito </Text>
             <Text style={styles.time}>🐷</Text>
+            <Text style={styles.dice}>Tu alcancia digital </Text>
           </View>
         </View>
         <View style={styles.buttonContainer}>
@@ -22,7 +23,7 @@ export default function Landing({ navigation }) {
             onPress={() => navigation.navigate("Home")}
             style={styles.buttonHome}
           >
-            <Text style={styles.buttonText}>Ingresar</Text>
+            <Text style={styles.buttonText}>INGRESAR</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -65,10 +66,11 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: "center",
     justifyContent: "center",
+    
   },
   buttonText: {
-    fontSize: 28,
-    fontWeight: "900",
+    fontSize: 35,
+    fontWeight: "400",
     color: "white",
   },
   buttonContainer: {
@@ -84,8 +86,8 @@ const styles = StyleSheet.create({
   recuadro: {
     borderRadius: 20,
     backgroundColor: "#fdbcb4",
-    height: 250,
-    width: 250,
+    height: 300,
+    width: 300,
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 10,
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
   quizz: {
     color: "white",
     fontWeight: "700",
-    fontSize: 60,
+    fontSize: 50,
     marginBottom: 40
   },
   time: {
@@ -101,4 +103,15 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 90,
   },
+  dice: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 24,
+    color: 'white',
+    fontWeight: '700',
+backgroundColor: '#C3867F',
+padding: 5,
+marginTop: 15,
+borderRadius: 6
+  }
 });
