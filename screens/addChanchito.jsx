@@ -34,7 +34,7 @@ const AddChanchito = () => {
       );
       dispatch(addChanchitoReducer(newChanchito));
       console.log("Saved correctly");
-      navigation.goBack();
+      navigation.navigate('Chanchitos');
     } catch (error) {
       console.log(error, "error en agregar chanchito");
     }

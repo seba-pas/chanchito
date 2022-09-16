@@ -4,16 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { allChanchitos } from "../redux/chanchitoSlice";
 import { useIsFocused } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-const Chanchito = (props) => {
+const Chanchitos = ({navigation}) => {
   const dispatch = useDispatch();
   const chanchis = useSelector((state) => state.chanchitos);
   const isFocused = useIsFocused();
   const platita = useSelector((state) => state.dinero)
-  console.log('esto es platita', platita)
 
+  console.log('esto es platita', platita.plata)
 
-  console.log(chanchis);
+  
+
+ 
 
   const show = useState(false);
 
@@ -33,6 +36,7 @@ const Chanchito = (props) => {
 
                   <Text style={styles.monto}>${e.monto.toString()}</Text>
                   <Text style={styles.descripcion}>{e.descripcion}</Text>
+                  {platita.plata >= e.monto? <View> <Text>Puedes {e.descripcion}</Text> </View>: <View></View>}
 
                 </View>
               );
@@ -48,7 +52,7 @@ const Chanchito = (props) => {
   );
 };
 
-export default Chanchito;
+export default Chanchitos;
 
 const styles = StyleSheet.create({
   container: {
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   chanchi: {
-    height: 160,
+    height: 180,
     width: 300,
     backgroundColor: "#fdbcb4",
     justifyContent: "center",

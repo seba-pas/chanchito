@@ -5,7 +5,7 @@ import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import PLATI from "react-native-vector-icons/MaterialIcons";
 import Information from "./Information";
 import Otros from "./Otros";
-import Chanchito from "./Chanchito";
+import Chanchitos from "../screens/Chanchitos";
 import AddChanchito from "../screens/AddChanchito";
 
 const Tab = createBottomTabNavigator();
@@ -58,7 +58,7 @@ export default function Home() {
       /> */}
       <Tab.Screen
         name="Chanchitos"
-        component={Chanchito}
+        component={Chanchitos}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <MCI name="piggy-bank" color={color} size={30} />
