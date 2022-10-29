@@ -1,22 +1,40 @@
-import { StyleSheet, Text, View, Switch, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Switch,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { allChanchitos } from "../redux/chanchitoSlice";
+import { allChanchitos, getDineroReducer, setDineroReducer } from "../redux/chanchitoSlice";
 import { useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 
-const Chanchitos = ({navigation}) => {
+const Chanchitos = ({ navigation }) => {
   const dispatch = useDispatch();
   const chanchis = useSelector((state) => state.chanchitos);
   const isFocused = useIsFocused();
-  const platita = useSelector((state) => state.dinero)
+  const platita = useSelector((state) => state.dinero);
 
-  console.log('esto es platita', platita.plata)
+  console.log("esto es platita", platita.plata);
 
-  
 
- 
+  useEffect(() => {
+    dispatch(getDineroReducer())
+  },[])
+
+
+
+  function handleAssign(money) {
+    let chanchiMoney = {
+      plata: platita.plata - money,
+    };
+    dispatch(setDineroReducer(chanchiMoney));
+    console.log("monto actualizado correctamente");
+  }
 
   const show = useState(false);
 
@@ -36,8 +54,20 @@ const Chanchitos = ({navigation}) => {
 
                   <Text style={styles.monto}>${e.monto.toString()}</Text>
                   <Text style={styles.descripcion}>{e.descripcion}</Text>
-                  {platita.plata >= e.monto? <View> <Text>Puedes {e.descripcion}</Text> </View>: <View></View>}
-
+                  {platita.plata >= e.monto ? (
+                    <View>
+                      {" "}
+                      <Text>Puedes {e.descripcion}</Text>{" "}
+                    </View>
+                  ) : (
+                    <View></View>
+                  )}
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={()=> handleAssign(e.monto)}
+                  >
+                    <Text style={styles.buttonText}>Asignar Dinero</Text>
+                  </TouchableOpacity>
                 </View>
               );
             })
@@ -60,11 +90,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFE5DE",
-    height: '100%',
-    paddingBottom: 120
+    height: "100%",
+    paddingBottom: 120,
+  },
+  buttonText: {
+    color: "white",
+    justifyContent: "center",
+    alignContent: "center",
   },
   scroll: {
-   height: '200%'
+    height: "200%",
   },
   title: {
     fontSize: 40,
@@ -109,6 +144,16 @@ const styles = StyleSheet.create({
   descripcion: {
     color: "#C3867F",
     fontSize: 22,
-    fontWeight: '800'
+    fontWeight: "800",
+  },
+  button: {
+    width: 250,
+    height: 60,
+    justifyContent: "center",
+    alignContent: "center",
+    backgroundColor: "#C3867F",
+    borderWidth: 2,
+    borderColor: "#C3867F",
+    borderRadius: 12,
   },
 });

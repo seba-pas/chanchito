@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#C3867F'
   },
   label: {
-    fontSize: 25,
+    fontSize: 18,
     marginLeft: 10,
     color: '#C3867F',
     fontWeight: '700'
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: '90%',
-    height: 250,
+    height: 230,
     justifyContent: 'center',
     alignContent: 'center',
     backgroundColor:  "#fdbcb4",

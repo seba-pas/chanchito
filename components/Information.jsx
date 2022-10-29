@@ -7,22 +7,28 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import { useDispatch } from "react-redux";
-import { setDineroReducer } from "../redux/chanchitoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setDineroReducer, getDineroReducer } from "../redux/chanchitoSlice";
 
-const Information = () => {
-  const [dinero, setDinero] = useState(0);
+const Information = () => {  
+  const [dinero, setDinero] = useState(0)
   const [valor, setValor] = useState(0);
-
+  const dineroDisponible = useSelector((state) => state.dinero)
   const dispatch = useDispatch();
+
+
+
+  const dineroRestante = dinero - dineroDisponible.plata
+  let esto = dineroRestante?dineroRestante: 0
 
   function moneyHandler() {
     setDinero(valor);
     const money = {
-      plata: valor,
+      plata: valor - esto,
     };
     dispatch(setDineroReducer(money));
   }
+
 
   return (
     <View style={styles.container}>
@@ -45,6 +51,10 @@ const Information = () => {
           <Text style={styles.buttonText}>Actualizar</Text>
         </TouchableOpacity>
       </View>
+      <View>
+        <Text style={styles.titulo}>Dinero no asignado </Text>
+        <Text style={styles.dinero}>${dineroRestante?dineroRestante: dinero}</Text>
+      </View>
     </View>
   );
 };
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
     color: "#C3867F",
   },
   dinero: {
-    marginTop: 40,
+    marginTop: 20,
     fontWeight: "800",
     fontSize: 40,
     color: "#C3867F",
@@ -73,7 +83,7 @@ const styles = StyleSheet.create({
     color: "#C3867F",
   },
   actualizar: {
-    marginTop: 80,
+    marginTop: 60,
     justifyContent: "center",
     alignItems: "center",
     color: "#C3867F",
@@ -83,9 +93,10 @@ const styles = StyleSheet.create({
     color: "#C3867F",
   },
   button: {
-    marginTop: 100,
+    marginTop: 20,
+    marginBottom: 20,
     width: 250,
-    height: 60,
+    height: 50,
     justifyContent: "center",
     alignContent: "center",
     backgroundColor: "#C3867F",
@@ -104,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontSize: 20,
-    width: 70,
+    width: 150,
     color: "#C3867F",
     fontWeight: "400",
   },

@@ -21,7 +21,11 @@ const initialState = {
             state.chanchitos
         },
         setDineroReducer: (state, action) => {
+            state.dinero = {}
             state.dinero = action.payload
+        },
+        getDineroReducer: (state) => {
+            state.dinero
         }
     }
 })
@@ -30,7 +34,8 @@ export const {
     setChanchitosReducer,
     addChanchitoReducer,
     allChanchitos,
-    setDineroReducer
+    setDineroReducer,
+    getDineroReducer
 } = chanchitosSlice.actions
 
 export default chanchitosSlice.reducer;
